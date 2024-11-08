@@ -1,49 +1,38 @@
 package servicios;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import modelo.Estudiante;
-import modelo.Materia;
+import java.util.List;
+import java.util.ArrayList;
 
 public class AlumnoServicio {
 
-	private Map<String, Estudiante> estudiantes;
+	private List<Estudiante> estudiantes;
 
 	public AlumnoServicio() {
-		estudiantes = new HashMap<>();
+		estudiantes = new ArrayList<>();
 	}
 
-	public void agregarEstudiante(Estudiante student) {
-		estudiantes.put(student.getRut(), student);
+	public void agregarEstudiante(Estudiante estudiante) {
+		estudiantes.add(estudiante);
 	}
 
-	public Estudiante obtenerEstudiante(String id) {
-		return estudiantes.get(id);
-	}
-
-	public void actualizarEstudiante(String id, String newNombre){
-		Estudiante estudiante = estudiantes.get(id);
-		if(estudiante != null) {
-			estudiante.setNombre(newNombre);
-			System.out.println("Estudiante actualizado.");
-		}else {
-			System.out.println("Estudiante No encontrado.");
-		}
-	}
-
-
-	public void listarEstudiantes() {
-		if(estudiantes.isEmpty()) {
-			System.out.println("No hay estudiantes registrados.");
-		}else {
-			for(Estudiante e : estudiantes.values()) {
-				System.out.println(e);
+	public Estudiante obtenerEstudiante(String rut) {
+		for (Estudiante estudiante : estudiantes) {
+			if (estudiante.getRut().equals(rut)) {
+				return estudiante;
 			}
 		}
+		return null; // No se encuentra el estudiante
 	}
-	public void agregarMateria(String rutAlumno,Materia currentMate) {
 
+	public void listarEstudiantes() {
+		for (Estudiante estudiante : estudiantes) {
+			System.out.println(estudiante);
+		}
+	}
 
+	// Método para obtener la lista de estudiantes
+	public List<Estudiante> getEstudiantes() {
+		return estudiantes;
 	}
 }
